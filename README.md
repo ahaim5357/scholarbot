@@ -6,10 +6,12 @@ Only has some doi support currently, though I plan on updating it more in the fu
 
 ## Current Requirements
 
-Using Node 19.8.1
-Using npm 9.5.1
+* Node 19.8.1
+* npm 9.5.1
 
 ## Environment File (.env)
+
+This is needed to run the bot.
 
 ```
 DISCORD_CLIENT_ID=<discord_client_id>
