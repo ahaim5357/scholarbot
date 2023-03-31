@@ -17,3 +17,27 @@ This is needed to run the bot.
 DISCORD_CLIENT_ID=<discord_client_id>
 DISCORD_TOKEN=<discord_token>
 ```
+
+## Useful Commands
+
+### Setup project
+
+```sh
+npm install
+```
+
+### Run linter
+
+Runs linter for all files in the `./src` directory.
+
+```sh
+npm run lint
+```
+
+### Run examples
+
+Runs the DOI from ACMDL discord example, assuming the `.env` file has been added.
+
+```sh
+npm run example:discord
+```
