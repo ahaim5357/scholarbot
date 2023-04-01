@@ -10,6 +10,14 @@ module.exports = {
     // Add plugin to linter for typescript
     plugins: ['@typescript-eslint'],
 
+    rules: {
+        // Disable unused vars because of interface logic
+        "@typescript-eslint/no-unused-vars": "off",
+
+        // Disable no inferrable types for better clarity
+        "@typescript-eslint/no-inferrable-types": "off"
+    },
+
     // Set this as the root linter
     root: true,
 };
