@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { crossrefPaperGetter } from "@/doi/crossref";
 import { PaperMetadata } from "@/metadata/paper";
+import { datacitePaperGetter } from "./datacite";
 
 export const jsonHeaders: AxiosRequestConfig = {
     headers: {
@@ -9,7 +10,8 @@ export const jsonHeaders: AxiosRequestConfig = {
 };
 
 const metadataGetters = {
-    'Crossref': crossrefPaperGetter
+    'Crossref': crossrefPaperGetter,
+    'DataCite': datacitePaperGetter
 };
 
 export const getPaperMetadata = async (doi: string) => {
