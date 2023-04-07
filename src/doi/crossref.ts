@@ -12,12 +12,24 @@ const agentHeaders = () => ({
     }
 }) as AxiosRequestConfig;
 
+const possibleXMLTags: string[] = ['jats:p', 'p'];
+
 const normalAbstractGetter = async (xmlString : string) => {
     // Read XML from string
     const abstractData = new XMLParser().parse(xmlString);
 
-    return abstractData['jats:p'];
+    // Loop over all valid xml tags and return the data
+    for (let xmlTag of possibleXMLTags) {
+        if (xmlTag in abstractData) {
+            return abstractData[xmlTag];
+        }
+    }
+    return 'N/A';
 }
+
+const noneAbstractGetter = async () => {
+    return '';
+};
 
 const acmAbstractGetter = async (referenceUrl: string) => {
     // Get webpage from ACM to extract abstract
@@ -47,9 +59,12 @@ export const crossrefPaperGetter: PaperGetter = async (doi: string) => {
     let abstract: Promise<string>;
     if ('abstract' in metadata) {
         abstract = normalAbstractGetter(metadata.abstract);
-    } else {
+    } else if (metadata.publisher in abstractGetters) {
         // If abstract isn't present, extract from publisher
         abstract = abstractGetters[metadata.publisher](referenceUrl);
+    } else {
+        // Otherwise, just resolve nothing
+        abstract = noneAbstractGetter();
     }
 
     // Get author information

@@ -67,24 +67,27 @@ client.on('interactionCreate',async (interaction: Interaction<CacheType>) => {
             const metadata = (await getPaperMetadata(interaction.options.getString('doi') as string));
 
             // Snip abstract if necessary
-            if (metadata.abstract.length > 1024) {
+            if (metadata.abstract && metadata.abstract.length > 1024) {
                 // Slice string at last word to be smaller than max limit
                 metadata.abstract = `${metadata.abstract.slice(0, metadata.abstract.lastIndexOf(' ', 1022))}...`;
             }
 
             // Create embed block with info
-            const embed = new EmbedBuilder()
+            const embed: EmbedBuilder = new EmbedBuilder()
                 .setTitle(metadata.getTitle(transformer))
                 .setColor('Blue')
                 .addFields(
                     { name: 'Reference', value: metadata.getReference(transformer) },
-                    { name: (metadata.authors.length === 1 ?  'Author' : 'Authors'), value: metadata.getAuthors(transformer) },
-                    { name: 'Abstract', value: metadata.abstract }
-                )
-                .toJSON();
+                    { name: (metadata.authors.length === 1 ?  'Author' : 'Authors'), value: metadata.getAuthors(transformer) }
+                );
+            
+            // If abstract is present, add it
+            if (metadata.abstract) {
+                embed.addFields({ name: 'Abstract', value: metadata.abstract });
+            }
             
             // Reply with result
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed.toJSON()] });
         } catch (error) {
             // Log error as a reply
             console.log(error);
