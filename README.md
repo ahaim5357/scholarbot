@@ -26,6 +26,12 @@ DISCORD_TOKEN=<discord_token>
 npm install
 ```
 
+### Run discord bot
+
+```sh
+npm run discord
+```
+
 ### Run linter
 
 Runs linter for all files in the `./src` directory.

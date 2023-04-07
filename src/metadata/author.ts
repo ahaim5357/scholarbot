@@ -1,5 +1,5 @@
 // Add necessary imports
-import { TextTransformer } from "../transformer/text";
+import { TextTransformer } from "@/transformer/text";
 
 /**
  * A class representing an author of a work.
