@@ -3,6 +3,12 @@ import axios from "axios";
 import { jsonHeaders } from "@/doi/getter";
 import { Author, ORCiDAuthor } from "@/metadata/author";
 
+/**
+ * Returns the abstract within the DataCite API.
+ * 
+ * @param descriptions A list containing the description of the DOI
+ * @returns An abstract
+ */
 const normalAbstractGetter = async (descriptions : any[]) => {
     for (let description of descriptions) {
         // Check if description type if abstract and return
@@ -13,6 +19,12 @@ const normalAbstractGetter = async (descriptions : any[]) => {
     return 'N/A';
 }
 
+/**
+ * Returns the paper metadata associated with the DataCite DOI.
+ * 
+ * @param doi A DataCite digital object identifier
+ * @returns The metadata associated with the DOI
+ */
 export const datacitePaperGetter: PaperGetter = async (doi: string) => {
     // Convert doi into JSON api url
     const referenceUrl: string = `https://api.datacite.org/application/vnd.datacite.datacite+json/${doi}`;

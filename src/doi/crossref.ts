@@ -6,14 +6,28 @@ import { Author, ORCiDAuthor } from "@/metadata/author";
 import { jsonHeaders } from "@/doi/getter";
 import { XMLParser } from "fast-xml-parser";
 
+/**
+ * Returns a randomly generated user agent header for a HTTP Request.
+ * 
+ * @returns a randomly generated user agent header
+ */
 const agentHeaders = () => ({
     headers: {
         'User-Agent': generateId16()
     }
 }) as AxiosRequestConfig;
 
+/**
+ * A list of possible XML tags that can hold the abstract.
+ */
 const possibleXMLTags: string[] = ['jats:p', 'p'];
 
+/**
+ * Returns the abstract within the CrossRef API.
+ * 
+ * @param xmlString A XML string holding the abstract
+ * @returns An abstract
+ */
 const normalAbstractGetter = async (xmlString : string) => {
     // Read XML from string
     const abstractData = new XMLParser().parse(xmlString);
@@ -27,10 +41,21 @@ const normalAbstractGetter = async (xmlString : string) => {
     return 'N/A';
 }
 
+/**
+ * Returns an empty abstract.
+ * 
+ * @returns An empty abstract
+ */
 const noneAbstractGetter = async () => {
     return '';
 };
 
+/**
+ * Returns an abstract on the ACM website.
+ * 
+ * @param referenceUrl The URL to a DOI on the ACM website
+ * @returns An abstract
+ */
 const acmAbstractGetter = async (referenceUrl: string) => {
     // Get webpage from ACM to extract abstract
     const acmHtml: string = (await axios.get(referenceUrl, agentHeaders())).data;
@@ -44,10 +69,20 @@ const acmAbstractGetter = async (referenceUrl: string) => {
     return abstract;
 };
 
+/**
+ * A map of publishers to abstract getters if the abstract is
+ * not on the metadata.
+ */
 const abstractGetters = {
     'ACM': acmAbstractGetter
 };
 
+/**
+ * Returns the paper metadata associated with the CrossRef DOI.
+ * 
+ * @param doi A CrossRef digital object identifier
+ * @returns The metadata associated with the DOI
+ */
 export const crossrefPaperGetter: PaperGetter = async (doi: string) => {
     // Convert doi into url
     const referenceUrl: string = `https://doi.org/${doi}`;
