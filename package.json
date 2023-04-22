@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint ./src",
     "discord": "npx ts-node -r tsconfig-paths/register ./src/integration/discord.ts",
+    "slack": "npx ts-node -r tsconfig-paths/register ./src/integration/slack.ts",
     "example:discord": "node ./examples/acm-example-discord.js"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "author": "Aaron Haim",
   "license": "ISC",
   "dependencies": {
+    "@slack/web-api": "^6.8.1",
     "axios": "^1.3.4",
     "discord.js": "^14.8.0",
     "dotenv": "^16.0.3",

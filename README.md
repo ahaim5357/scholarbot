@@ -16,6 +16,8 @@ This is needed to run the bot.
 ```
 DISCORD_CLIENT_ID=<discord_client_id>
 DISCORD_TOKEN=<discord_token>
+SLACK_HOST=<host> (e.g. slack looks for /doi POST endpoint)
+SLACK_PORT=<port>
 ```
 
 ## Useful Commands
@@ -30,6 +32,14 @@ npm install
 
 ```sh
 npm run discord
+```
+
+### Run slack bot
+
+The slack bot registers a slash command in the api. The slash command looks for a request url, so you will need to use something like [`ngrok`](https://ngrok.com/) to map localhost to a public url. The endpoint used within this example is `/doi`.
+
+```sh
+npm run slack
 ```
 
 ### Run linter
@@ -47,3 +57,5 @@ Runs the DOI from ACMDL discord example, assuming the `.env` file has been added
 ```sh
 npm run example:discord
 ```
+
+
