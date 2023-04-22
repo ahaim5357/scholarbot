@@ -10,7 +10,7 @@ import { Author, ORCiDAuthor } from "@/metadata/author";
  * @returns An abstract
  */
 const normalAbstractGetter = async (descriptions : any[]) => {
-    for (let description of descriptions) {
+    for (const description of descriptions) {
         // Check if description type if abstract and return
         if (description.descriptionType === 'Abstract') {
             return description.description;
@@ -41,7 +41,7 @@ export const datacitePaperGetter: PaperGetter = async (doi: string) => {
         const name = `${author.givenName} ${author.familyName}`;
 
         // Check nameIdentifiers for orcid and set if present
-        for (let id of author.nameIdentifiers) {
+        for (const id of author.nameIdentifiers) {
             if (id.nameIdentifierScheme === 'ORCID') {
                 return new ORCiDAuthor(name, id.nameIdentifier);
             }

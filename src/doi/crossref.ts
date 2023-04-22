@@ -33,7 +33,7 @@ const normalAbstractGetter = async (xmlString : string) => {
     const abstractData = new XMLParser().parse(xmlString);
 
     // Loop over all valid xml tags and return the data
-    for (let xmlTag of possibleXMLTags) {
+    for (const xmlTag of possibleXMLTags) {
         if (xmlTag in abstractData) {
             return abstractData[xmlTag];
         }
@@ -85,6 +85,7 @@ const abstractGetters = {
  */
 export const crossrefPaperGetter: PaperGetter = async (doi: string) => {
     // Convert doi into url
+    // TODO: Use CrossRef API method instead (https://api.crossref.org/swagger-ui/index.html#/Works/get_works__doi_)
     const referenceUrl: string = `https://doi.org/${doi}`;
 
     // Get crossref data JSON from url
