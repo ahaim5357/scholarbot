@@ -67,9 +67,9 @@ client.on('interactionCreate',async (interaction: Interaction<CacheType>) => {
             const metadata = (await getPaperMetadata(interaction.options.getString('doi') as string));
 
             // Snip abstract if necessary
-            if (metadata.abstract && metadata.abstract.length > 1024) {
+            if (metadata.abstract && metadata.abstract.length > 350) {
                 // Slice string at last word to be smaller than max limit
-                metadata.abstract = `${metadata.abstract.slice(0, metadata.abstract.lastIndexOf(' ', 1021))}...`;
+                metadata.abstract = `${metadata.abstract.slice(0, metadata.abstract.lastIndexOf(' ', 347))}...`;
             }
 
             // Create embed block with info
