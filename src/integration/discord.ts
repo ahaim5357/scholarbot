@@ -52,7 +52,7 @@ const commands = [
 
 // On log in
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user!.tag}!`);
+    console.log(`Logged in as ${client.user?.tag}!`);
 });
 
 // On command sent from user
