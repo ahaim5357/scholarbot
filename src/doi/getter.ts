@@ -12,6 +12,11 @@ export const jsonHeaders: AxiosRequestConfig = {
     }
 };
 
+interface RegistryAgency {
+    DOI: string;
+    RA: string;
+}
+
 /**
  * A map of registry agencies to getters of the DOI.
  */
@@ -30,7 +35,7 @@ export const getPaperMetadata = async (doi: string) => {
     // Get registry agency
     const doiRAUrl: string = `https://doi.org/doiRA/${doi}`;
 
-    const ra: any = (await axios.get(doiRAUrl, jsonHeaders)).data[0];
+    const ra: RegistryAgency = (await axios.get(doiRAUrl, jsonHeaders)).data[0];
 
     // Get metadata from doi
     return metadataGetters[ra.RA](ra.DOI) as Promise<PaperMetadata>;
