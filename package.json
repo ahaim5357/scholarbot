@@ -8,6 +8,7 @@
     "lint": "npx eslint ./src",
     "discord": "npx ts-node -r tsconfig-paths/register ./src/integration/discord.ts",
     "slack": "npx ts-node -r tsconfig-paths/register ./src/integration/slack.ts",
+    "all": "npx ts-node -r tsconfig-paths/register ./src/integration/all.ts",
     "example:discord": "node ./examples/acm-example-discord.js"
   },
   "repository": {
